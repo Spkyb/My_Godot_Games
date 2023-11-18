@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6icococsf87i"]
+
+[ext_resource type="Script" path="res://script/main_scene.gd" id="1_v3muq"]
+[ext_resource type="PackedScene" uid="uid://bvg17ecxfusy" path="res://scenes/grid.tscn" id="2_36k2o"]
+
+[node name="MainScene" type="Node2D"]
+script = ExtResource("1_v3muq")
+
+[node name="Grid" parent="." instance=ExtResource("2_36k2o")]
+line_color = Color(0.247059, 0.247059, 0.247059, 1)

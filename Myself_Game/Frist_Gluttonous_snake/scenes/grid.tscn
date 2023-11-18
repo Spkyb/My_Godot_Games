@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvg17ecxfusy"]
+
+[ext_resource type="Script" path="res://script/grid.gd" id="1_b8sjn"]
+
+[sub_resource type="TileSet" id="TileSet_qh1u2"]
+tile_size = Vector2i(32, 32)
+
+[node name="Grid" type="TileMap"]
+tile_set = SubResource("TileSet_qh1u2")
+format = 2
+script = ExtResource("1_b8sjn")
