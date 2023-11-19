@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var scene_shake : PackedScene = preload("res://scenes/Shake.tscn")
+@onready var scene_shake : PackedScene = preload("res://scenes/Snake.tscn")
 @onready var scene_food : PackedScene = preload("res://scenes/Food.tscn")
 
 @onready var grid: Grid = get_node("Grid")
