@@ -1,12 +1,13 @@
-class_name Shake
+class_name Snake
 
 extends Node2D
+
+@onready var scene_tail : PackedScene = preload("res://scenes/Tail.tscn")
 
 @onready var direction = Vector2() # 移动的方向
 @onready var body_segments: Array = [self] # 蛇身数组
 @onready var can_move: bool = false
 
-const scene_tail = preload("res://scenes/Tail.tscn")
 
 signal snake_move_triggered(entity, direction)
 signal body_segment_move_triggered(segment, segment_pos)
@@ -22,8 +23,9 @@ func _input(event):
 		direction = Vector2(-1, 0)
 	elif event.is_action_pressed("ui_right"):
 		direction = Vector2(1, 0)
+		
 
-func _process(delta):
+func _process(_delta):
 	if direction != Vector2() and can_move:# 只有direction有值时再执行。游戏刚开始，没有按下任何方向键时，snake是不动的
 		can_move = false
 		var pre_segment_pos: Vector2 = self.position # 前一实体的位置。每遍历一个实体就将它当前的位置附与它，这样下一个实体就知道自己应该往哪里去
@@ -35,7 +37,7 @@ func _process(delta):
 				temp_pos = body_segments[i].position
 				emit_signal("body_segment_move_triggered", body_segments[i], pre_segment_pos)
 				pre_segment_pos = temp_pos
-		# 延时移动
+		
 		$MoveDelay.start()
 
 func eat_food():

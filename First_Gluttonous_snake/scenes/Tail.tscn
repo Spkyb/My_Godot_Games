@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cysj21cl0nj6r"]
 
-[node name="Tail" type="Node2D"]
+[node name="Tail" type="Node2D" groups=["Snake"]]
 
 [node name="Area2D" type="Area2D" parent="."]
 

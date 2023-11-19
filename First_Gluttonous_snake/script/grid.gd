@@ -7,11 +7,13 @@ extends TileMap
 
 @onready var grid_size = Vector2(32,19)#32*32=1064、19*32=608，刚刚好为窗口大小
 
-signal eat_food(food_entity,entity)
+signal eat_food(food_entity,entity)# 吃到食物信号
+signal game_over()# 游戏结束信号
+
 
 var grid : Array # 创建grid数组
 
-# 将grid数组按网格数填满
+# 将grid数组按网格数填满,初始化地图
 func init_grid():
 	grid = []
 	for x in range(grid_size.x):
@@ -35,17 +37,17 @@ func _draw():
 func place_entity_at_random_pos(entity: Node2D):
 	var has_random_pos: bool = false
 	var random_grid_pos: Vector2
-	
+	#
 	while has_random_pos == false:
 		var temp_pos: Vector2 = Vector2(randf() * int(grid_size.x),randf() * int(grid_size.y))# randf()0-1
 		if get_entity_of_cell(temp_pos) == null:
 			random_grid_pos = temp_pos
 			has_random_pos = true
 	place_entity(entity,random_grid_pos)
+	
 #直接返回指定x,y的grid数组的数据，如果不为null，则已有实体
 func get_entity_of_cell(grid_pos: Vector2):
 	return grid[grid_pos.x][grid_pos.y] as Node2D
-	#return grid[grid_pos.x][grid_pos.y]
 
 # 将grid数组里对应位置的值附上实体
 # 将实体的position设置为网格的坐标
@@ -61,12 +63,20 @@ func set_entity_in_cell(entity: Node2D, grid_pos: Vector2):
 func move_entity_in_direction(entity: Node2D, direction: Vector2):
 	var old_grid_pos: Vector2 = local_to_map(entity.position)
 	var new_grid_pos: Vector2 = old_grid_pos + direction # 它原来位置加上direction，direction是一个向量，所以它是有方向的
+	# 碰到边界
+	if !is_cell_inside_bounds(new_grid_pos):
+		emit_signal("game_over")
+		
+		return
 	#吃到食物，先判断是否有食物，再进行下一步
 	var entity_of_new_cell: Node2D = get_entity_of_cell(new_grid_pos)
+	
 	if entity_of_new_cell != null:
-		#print("3")
-		if entity_of_new_cell.is_in_group("Food"):#实体是食物分组里面
+		if entity_of_new_cell.is_in_group("Food"):# 实体是Food分组里面
 			emit_signal("eat_food",entity_of_new_cell,entity)
+		elif entity_of_new_cell.is_in_group("Snake"):# 实体是Snake分组里面
+			init_grid()#清空所有格子，初始化地图数据
+			emit_signal("game_over")
 	#
 	set_entity_in_cell(null, old_grid_pos)# 将指定位置的数组值清空（null）
 	place_entity(entity, new_grid_pos)# 将实体放置到新的位置上
@@ -79,5 +89,11 @@ func move_entity_to_position(entity: Node2D, direction: Vector2):
 	set_entity_in_cell(null, old_grid_pos)#将 指定位置的数组值清空（null）
 	place_entity(entity, new_grid_pos)# 将实体放置到新的位置上
 
+# 蛇头出了边界的判断
+func is_cell_inside_bounds(cell_pos:Vector2):
+	if cell_pos.x < grid_size.x and cell_pos.y >= 0 and cell_pos.y < grid_size.y and cell_pos.x >= 0:
+		return true
+	else: 
+		return false
 func _ready():
 	init_grid()
