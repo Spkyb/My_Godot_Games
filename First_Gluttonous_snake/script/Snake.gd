@@ -8,27 +8,24 @@ extends Node2D
 @onready var body_segments: Array = [self] # 蛇身数组
 @onready var can_move: bool = false
 
-
 signal snake_move_triggered(entity, direction)
 signal body_segment_move_triggered(segment, segment_pos)
 signal generated_tail_segment(segment, segment_pos)
 
-
 func _input(event):
-	if event.is_action_pressed("ui_up"):
+	if event.is_action_pressed("ui_up") and direction != Vector2(0, 1):
 		direction = Vector2(0, -1)
-	elif event.is_action_pressed("ui_down"):
+	elif event.is_action_pressed("ui_down")and direction != Vector2(0, -1):
 		direction = Vector2(0, 1)
-	elif event.is_action_pressed("ui_left"):
+	elif event.is_action_pressed("ui_left")and direction != Vector2(1, 0):
 		direction = Vector2(-1, 0)
-	elif event.is_action_pressed("ui_right"):
+	elif event.is_action_pressed("ui_right")and direction != Vector2(-1, 0):
 		direction = Vector2(1, 0)
-		
 
 func _process(_delta):
 	if direction != Vector2() and can_move:# 只有direction有值时再执行。游戏刚开始，没有按下任何方向键时，snake是不动的
 		can_move = false
-		var pre_segment_pos: Vector2 = self.position # 前一实体的位置。每遍历一个实体就将它当前的位置附与它，这样下一个实体就知道自己应该往哪里去
+		var pre_segment_pos: Vector2 = self.position # +一实体的位置。每遍历一个实体就将它当前的位置附与它，这样下一个实体就知道自己应该往哪里去
 		for i in range(body_segments.size()):
 			var temp_pos: Vector2 = Vector2()
 			if i == 0:# 当处理第一个实体（蛇头）时，发送信号，移动蛇头
@@ -40,6 +37,7 @@ func _process(_delta):
 		
 		$MoveDelay.start()
 
+# 吃到食物
 func eat_food():
 	var tail_segment = scene_tail.instantiate()
 	body_segments.append(tail_segment)# 将实例化后的场景添加在后面

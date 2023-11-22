@@ -35,13 +35,23 @@ func init_food():
 	grid.place_entity_at_random_pos(food)
 
 func _ready():
+	Global.arena = self
 	init_entities()
+	Global.score = 0
+	$HUD.set_highscore(Global.high_score)
+
+func _process(_delta):
+	# 如果按下esc,退出游戏
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().quit()
+	pass
 
 # 接收到吃到食物信号的应激函数
 func _on_grid_eat_food(food_entity, entity):
 	if entity.has_method("eat_food"):
 		entity.eat_food()
 		food_entity.queue_free()
+		Global.add_score(1)
 		init_food()
 
 # 接收到游戏结束信号的应激函数

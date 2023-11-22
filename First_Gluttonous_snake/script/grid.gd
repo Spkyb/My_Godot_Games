@@ -10,7 +10,6 @@ extends TileMap
 signal eat_food(food_entity,entity)# 吃到食物信号
 signal game_over()# 游戏结束信号
 
-
 var grid : Array # 创建grid数组
 
 # 将grid数组按网格数填满,初始化地图
@@ -63,11 +62,18 @@ func set_entity_in_cell(entity: Node2D, grid_pos: Vector2):
 func move_entity_in_direction(entity: Node2D, direction: Vector2):
 	var old_grid_pos: Vector2 = local_to_map(entity.position)
 	var new_grid_pos: Vector2 = old_grid_pos + direction # 它原来位置加上direction，direction是一个向量，所以它是有方向的
-	# 碰到边界
+	
+	# 如果碰到边界
 	if !is_cell_inside_bounds(new_grid_pos):
-		emit_signal("game_over")
-		
-		return
+		if new_grid_pos.x < 0:
+			new_grid_pos.x = grid_size.x - 0.1
+		elif new_grid_pos.x >= grid_size.x:
+			new_grid_pos.x = 0
+		elif new_grid_pos.y < 0:
+			new_grid_pos.y = grid_size.y - 0.1
+		elif new_grid_pos.y >= grid_size.y:
+			new_grid_pos.y = 0
+
 	#吃到食物，先判断是否有食物，再进行下一步
 	var entity_of_new_cell: Node2D = get_entity_of_cell(new_grid_pos)
 	
@@ -95,5 +101,6 @@ func is_cell_inside_bounds(cell_pos:Vector2):
 		return true
 	else: 
 		return false
+		
 func _ready():
 	init_grid()
