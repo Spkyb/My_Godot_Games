@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://2bafdk0aivuu"]
+
+[ext_resource type="Script" path="res://scripts/main_scene.gd" id="1_g6yv6"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_7oywy"]
+b = Vector2(-0.000895209, 1024)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_6wy85"]
+b = Vector2(0, 576)
+
+[node name="Main_scene" type="Node2D"]
+script = ExtResource("1_g6yv6")
+
+[node name="boundary" type="Sprite2D" parent="."]
+
+[node name="boundary_1" type="Area2D" parent="boundary" groups=["boundary_up_or_down"]]
+
+[node name="down" type="CollisionShape2D" parent="boundary/boundary_1"]
+position = Vector2(0, 576)
+rotation = -1.5708
+scale = Vector2(0.05, 1)
+shape = SubResource("SegmentShape2D_7oywy")
+
+[node name="up" type="CollisionShape2D" parent="boundary/boundary_1"]
+rotation = -1.5708
+scale = Vector2(0.05, 1)
+shape = SubResource("SegmentShape2D_7oywy")
+
+[node name="boundary_2" type="Area2D" parent="boundary" groups=["boundary_left_or_right"]]
+
+[node name="right" type="CollisionShape2D" parent="boundary/boundary_2"]
+position = Vector2(1024, 0)
+scale = Vector2(0.05, 1)
+shape = SubResource("SegmentShape2D_6wy85")
+
+[node name="left" type="CollisionShape2D" parent="boundary/boundary_2"]
+scale = Vector2(0.05, 1)
+shape = SubResource("SegmentShape2D_6wy85")

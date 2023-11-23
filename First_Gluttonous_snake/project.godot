@@ -23,3 +23,4 @@ Global="*res://script/Global.gd"
 
 window/size/viewport_width=1024
 window/size/viewport_height=608
+window/stretch/mode="viewport"
