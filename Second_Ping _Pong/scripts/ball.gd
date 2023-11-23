@@ -1,12 +1,13 @@
+
 extends Node2D
 
 #外部可以直接修改的变量
-@export var speed : int = 5
+@export var speed : int = 6
 
 func _ready():
 	# 随机给球一个方向
 	Global.ball_direction.x = randf_range(-1,1)
-	Global.ball_direction.y = randf_range(-1,1)
+	Global.ball_direction.y = randf_range(-0.3,0.3)
 	
 func _process(delta):
 	
