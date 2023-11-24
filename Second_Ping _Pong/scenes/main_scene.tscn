@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://2bafdk0aivuu"]
+[gd_scene load_steps=5 format=3 uid="uid://2bafdk0aivuu"]
 
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="1_g6yv6"]
+[ext_resource type="Script" path="res://scripts/HUD.gd" id="2_07bl7"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_7oywy"]
 b = Vector2(-0.000895209, 1024)
@@ -36,3 +37,35 @@ shape = SubResource("SegmentShape2D_6wy85")
 [node name="left" type="CollisionShape2D" parent="boundary/boundary_2"]
 scale = Vector2(0.05, 1)
 shape = SubResource("SegmentShape2D_6wy85")
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_07bl7")
+
+[node name="CenterContainer" type="CenterContainer" parent="HUD"]
+layout_mode = 0
+offset_right = 1024.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/CenterContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HighScore" type="Label" parent="HUD/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "最高分："
+
+[node name="HighScoreNumber" type="Label" parent="HUD/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="ScoreNumber" type="Label" parent="HUD/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
