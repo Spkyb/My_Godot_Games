@@ -16,7 +16,6 @@ scale = Vector2(0.3, 0.1)
 texture = ExtResource("2_s4ms6")
 
 [node name="Area2D" type="Area2D" parent="." groups=["player"]]
-visible = false
 scale = Vector2(2.8125, 0.25)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]

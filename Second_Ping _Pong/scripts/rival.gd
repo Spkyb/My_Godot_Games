@@ -1,10 +1,9 @@
 extends Node2D
 #外部可以直接修改的变量
-@export var speed : int = 5
+@export var speed : int = 2
 
 var vec = Vector2()
 var screen_size
-
 
 func _ready():
 	# 获得屏幕尺寸
@@ -17,6 +16,7 @@ func _process(delta):
 	position.x = clamp(position.x, screen_size.x / 2 + 13, screen_size.x - 13)
 	position.y = clamp(position.y, 39, screen_size.y - 39)
 
+# rival的移动
 func rival_move(delta):
 	var ball_x_distance = position.x - Global.ball.position.x
 	var ball_y_distance = position.y - Global.ball.position.y

@@ -14,27 +14,29 @@ script = ExtResource("1_g6yv6")
 
 [node name="boundary" type="Sprite2D" parent="."]
 
-[node name="boundary_1" type="Area2D" parent="boundary" groups=["boundary_up_or_down"]]
+[node name="boundary_u&d" type="Area2D" parent="boundary" groups=["boundary_up_or_down"]]
 
-[node name="down" type="CollisionShape2D" parent="boundary/boundary_1"]
+[node name="down" type="CollisionShape2D" parent="boundary/boundary_u&d"]
 position = Vector2(0, 576)
 rotation = -1.5708
 scale = Vector2(0.05, 1)
 shape = SubResource("SegmentShape2D_7oywy")
 
-[node name="up" type="CollisionShape2D" parent="boundary/boundary_1"]
+[node name="up" type="CollisionShape2D" parent="boundary/boundary_u&d"]
 rotation = -1.5708
 scale = Vector2(0.05, 1)
 shape = SubResource("SegmentShape2D_7oywy")
 
-[node name="boundary_2" type="Area2D" parent="boundary" groups=["boundary_left_or_right"]]
+[node name="boundary_left" type="Area2D" parent="boundary" groups=["boundary_left"]]
 
-[node name="right" type="CollisionShape2D" parent="boundary/boundary_2"]
-position = Vector2(1024, 0)
+[node name="left" type="CollisionShape2D" parent="boundary/boundary_left"]
 scale = Vector2(0.05, 1)
 shape = SubResource("SegmentShape2D_6wy85")
 
-[node name="left" type="CollisionShape2D" parent="boundary/boundary_2"]
+[node name="boundary_right" type="Area2D" parent="boundary" groups=["boundary_right"]]
+
+[node name="right" type="CollisionShape2D" parent="boundary/boundary_right"]
+position = Vector2(1024, 0)
 scale = Vector2(0.05, 1)
 shape = SubResource("SegmentShape2D_6wy85")
 

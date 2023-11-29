@@ -13,7 +13,8 @@ func _ready():
 func _process(delta):
 	vec.x = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
 	vec.y = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
-	position += vec.normalized() * speed * delta * 80
+	Global.player_direction = vec.normalized()
+	position += Global.player_direction * speed * delta * 80
 	
 	# 防止离开player离开屏幕
 	position.x = clamp(position.x, 13, screen_size.x / 2 - 13)

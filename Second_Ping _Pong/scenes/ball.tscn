@@ -15,7 +15,6 @@ scale = Vector2(0.0844531, 0.0844531)
 texture = ExtResource("1_tk2ah")
 
 [node name="Area2D" type="Area2D" parent="." groups=["ball"]]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_gpicp")
