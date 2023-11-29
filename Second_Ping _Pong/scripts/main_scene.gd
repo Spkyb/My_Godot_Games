@@ -1,7 +1,6 @@
 extends Node2D
 
 @onready var player_scene : PackedScene = preload("res://scenes/player.tscn")
-
 @onready var Rival_scene : PackedScene = preload("res://scenes/rival.tscn")
 
 func _ready():

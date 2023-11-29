@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://devvmk2humjh8"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_vbow8"]
+[ext_resource type="Texture2D" uid="uid://ck8h2c5fpdqqk" path="res://Cube.png" id="2_600wn"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_0yefd"]
+b = Vector2(-6.10352e-05, 1152)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_vbow8")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+follow_viewport_enabled = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1152, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+modulate = Color(0.388235, 0.729412, 0.945098, 1)
+position = Vector2(577, 324.5)
+scale = Vector2(4.5, 2.53516)
+texture = ExtResource("2_600wn")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.8
+one_shot = true
+autostart = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 648)
+rotation = -1.5708
+shape = SubResource("SegmentShape2D_0yefd")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
