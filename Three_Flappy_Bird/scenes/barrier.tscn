@@ -4,29 +4,47 @@
 [ext_resource type="Script" path="res://scenes/barrier.gd" id="1_elktt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7tajp"]
-size = Vector2(94, 446)
+size = Vector2(94, 447.124)
 
 [node name="Barrier" type="StaticBody2D"]
+light_mask = 2
 position = Vector2(0, 324)
 collision_layer = 2
 script = ExtResource("1_elktt")
 
 [node name="Sprite1" type="Sprite2D" parent="."]
 modulate = Color(0.501961, 0.701961, 0.533333, 1)
-position = Vector2(0, -324)
+position = Vector2(-47.5, -323.876)
 scale = Vector2(0.371094, 1.74316)
 texture = ExtResource("1_582t6")
 
 [node name="Sprite3" type="Sprite2D" parent="."]
 modulate = Color(0.501961, 0.701961, 0.533333, 1)
-position = Vector2(0, 324)
+position = Vector2(-47.5, 324.124)
 scale = Vector2(0.371094, 1.74316)
 texture = ExtResource("1_582t6")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -324)
-shape = SubResource("RectangleShape2D_7tajp")
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2(0, 324)
+visible = false
+position = Vector2(-47.5, 324.124)
 shape = SubResource("RectangleShape2D_7tajp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-47.5, -323.876)
+shape = SubResource("RectangleShape2D_7tajp")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-47.5, 323.562)
+shape = SubResource("RectangleShape2D_7tajp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-47.5, -323.876)
+shape = SubResource("RectangleShape2D_7tajp")
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

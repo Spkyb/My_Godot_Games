@@ -3,6 +3,8 @@ extends CharacterBody2D
 const SPEED = 300.0 # 速度
 const JUMP_VELOCITY = -350.0 
 
+signal die
+
 # 从项目设置中获取要与player同步的重力
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -16,3 +18,5 @@ func _physics_process(delta):
 	# 移动角色，代替对position的使用
 	move_and_slide()
 
+func _on_area_2d_area_entered(area):
+	emit_signal("die")

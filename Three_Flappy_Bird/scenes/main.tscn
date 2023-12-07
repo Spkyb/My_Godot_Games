@@ -10,7 +10,6 @@ b = Vector2(-6.10352e-05, 1152)
 script = ExtResource("1_vbow8")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-visible = false
 follow_viewport_enabled = true
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
