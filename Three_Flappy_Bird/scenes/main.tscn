@@ -26,10 +26,10 @@ wait_time = 1.8
 one_shot = true
 autostart = true
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Area" type="Area2D" parent="."]
 collision_layer = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area"]
 position = Vector2(0, 648)
 rotation = -1.5708
 shape = SubResource("SegmentShape2D_0yefd")
